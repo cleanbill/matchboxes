@@ -76,7 +76,7 @@ export const TrainingPanel: React.FC<TrainingPanelProps> = ({
 
           {/* Preset Buttons */}
           <div className="flex items-center gap-1.5 flex-wrap">
-            {[10, 100, 500, 1000, 10000].map((count) => (
+            {[10, 100, 1000, 10000, 100000].map((count) => (
               <button
                 key={count}
                 disabled={isAutoTraining}
@@ -93,7 +93,7 @@ export const TrainingPanel: React.FC<TrainingPanelProps> = ({
                   }
                 `}
               >
-                +{count.toLocaleString()}
+                +{count >= 1000 ? `${count / 1000}k` : count}
               </button>
             ))}
           </div>

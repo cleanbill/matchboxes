@@ -75,8 +75,8 @@ export const TrainingPanel: React.FC<TrainingPanelProps> = ({
           </select>
 
           {/* Preset Buttons */}
-          <div className="flex items-center gap-1.5">
-            {[10, 50, 100, 500].map((count) => (
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {[10, 100, 500, 1000, 10000].map((count) => (
               <button
                 key={count}
                 disabled={isAutoTraining}
@@ -85,7 +85,7 @@ export const TrainingPanel: React.FC<TrainingPanelProps> = ({
                   onStartAutoTrain(count, trainOpponent);
                 }}
                 className={`
-                  px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all border
+                  px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all border
                   ${
                     trainGames === count && !isAutoTraining
                       ? 'bg-amber-500/20 text-amber-300 border-amber-500/50'
@@ -93,7 +93,7 @@ export const TrainingPanel: React.FC<TrainingPanelProps> = ({
                   }
                 `}
               >
-                +{count}
+                +{count.toLocaleString()}
               </button>
             ))}
           </div>

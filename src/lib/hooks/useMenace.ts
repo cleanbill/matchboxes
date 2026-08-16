@@ -304,7 +304,8 @@ export function useMenace() {
           historyPoints.push({ game: total, menaceWinRate: winRate, drawRate });
         }
 
-        if (i % 25 === 0 || i === numGames) {
+        const stepInterval = Math.max(25, Math.floor(numGames / 100));
+        if (i % stepInterval === 0 || i === numGames) {
           setMatchboxes(currentBoxes);
           setTrainingProgress({ current: i, total: numGames });
           setStats({

@@ -7,6 +7,12 @@ interface AnalyticsPanelProps {
   stats: GameStats;
 }
 
+function formatNumber(n: number): string {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)} million`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(n % 1_000 === 0 ? 0 : 1)}K`;
+  return n.toLocaleString();
+}
+
 export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ stats }) => {
   const { totalGames, menaceWins, opponentWins, draws, winRateHistory } = stats;
 
@@ -25,8 +31,8 @@ export const AnalyticsPanel: React.FC<AnalyticsPanelProps> = ({ stats }) => {
           </h2>
         </div>
 
-        <span className="text-xs font-mono text-slate-400">
-          Total Games: <strong className="text-slate-100 font-bold">{totalGames}</strong>
+        <span className="text-xs font-mono text-slate-400" title={`${totalGames.toLocaleString()} games`}>
+          Total Games: <strong className="text-slate-100 font-bold">{formatNumber(totalGames)}</strong>
         </span>
       </div>
 

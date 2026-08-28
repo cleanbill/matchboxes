@@ -60,7 +60,8 @@ export interface CanonicalResult {
   canonicalId: string;
   canonicalBoard: BoardState;
   transformIndex: number; // Index into TRANSFORMS
-  transformMap: number[];
+  transformMap: number[];        // original → canonical
+  inverseTransformMap: number[]; // canonical → original
 }
 
 /**
@@ -87,11 +88,14 @@ export function getCanonicalRepresentation(board: BoardState): CanonicalResult {
     canonicalBoard: bestBoard,
     transformIndex: bestTransformIndex,
     transformMap: TRANSFORMS[bestTransformIndex].map,
+    inverseTransformMap: TRANSFORMS[bestTransformIndex].inverseMap,
   };
 }
 
 /**
  * Given a move chosen on the canonical board (0..8), returns the corresponding move index on the actual game board.
+ * Uses the forward transform map (canonical → actual): since canonical[i] = actual[map[i]],
+ * the actual index for canonical position ci is simply map[ci].
  */
 export function canonicalMoveToActualMove(canonicalMoveIndex: number, transformMap: number[]): number {
   return transformMap[canonicalMoveIndex];

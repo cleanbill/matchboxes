@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   BoardState,
@@ -253,7 +254,7 @@ export function useMenace() {
       for (let i = 1; i <= numGames; i++) {
         if (!autoTrainRef.current) break;
 
-        let simBoard = createEmptyBoard();
+        const simBoard = createEmptyBoard();
         let simPlayer: Player = 'X';
         const simHistory: MoveRecord[] = [];
         let simResult: GameResult = null;

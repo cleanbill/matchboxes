@@ -1,5 +1,5 @@
 import { BoardState, Matchbox, Player } from './types';
-import { getCanonicalRepresentation, stringToBoard } from './symmetry';
+import { getCanonicalRepresentation } from './symmetry';
 import { createEmptyBoard, evaluateGame, getTurnNumber, getValidMoves } from './boardUtils';
 
 /**

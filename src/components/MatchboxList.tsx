@@ -92,7 +92,7 @@ export const MatchboxList: React.FC<MatchboxListProps> = ({
 
           <select
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
+            onChange={(e) => setSortBy(e.target.value as 'ACTIVE' | 'ACCESSED' | 'BEADS' | 'TURN')}
             className="px-2 py-1 bg-slate-950/80 border border-slate-800 rounded-lg text-[11px] text-slate-300 focus:outline-none focus:border-cyan-500/60"
           >
             <option value="ACTIVE">Active First</option>

@@ -66,7 +66,7 @@ export const TrainingPanel: React.FC<TrainingPanelProps> = ({
           {/* Opponent Type Selector */}
           <select
             value={trainOpponent}
-            onChange={(e) => setTrainOpponent(e.target.value as any)}
+            onChange={(e) => setTrainOpponent(e.target.value as 'RANDOM' | 'PERFECT')}
             disabled={isAutoTraining}
             className="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium focus:outline-none focus:border-cyan-500"
           >

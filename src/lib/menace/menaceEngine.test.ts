@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { selectMenaceMove, reinforceMatchboxes } from './menaceEngine';
 import { generateMatchboxes } from './matchboxGenerator';
-import { createEmptyBoard, evaluateGame, getRandomMove, getMinimaxMove } from './boardUtils';
+import { createEmptyBoard, evaluateGame, getRandomMove } from './boardUtils';
 import { getCanonicalRepresentation } from './symmetry';
 import { BoardState, GameResult, Matchbox, MoveRecord, Player } from './types';
 

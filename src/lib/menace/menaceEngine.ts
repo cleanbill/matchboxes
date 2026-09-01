@@ -118,7 +118,19 @@ export function reinforceMatchboxes(
       [record.moveIndex]: newCount,
     };
 
-    const newTotalBeads = Object.values(newBeads).reduce((a, b) => a + b, 0);
+    let newTotalBeads = Object.values(newBeads).reduce((a, b) => a + b, 0);
+
+    // Normalization / Decay: Prevent unbounded growth
+    // If the total beads in the matchbox exceeds 500, scale down all bead counts
+    // by 20% while ensuring they don't drop below 1 unless they were already 0.
+    if (newTotalBeads > 500) {
+      for (const moveIdx in newBeads) {
+        if (newBeads[moveIdx] > 0) {
+          newBeads[moveIdx] = Math.max(1, Math.floor(newBeads[moveIdx] * 0.8));
+        }
+      }
+      newTotalBeads = Object.values(newBeads).reduce((a, b) => a + b, 0);
+    }
 
     updatedMatchboxes[record.matchboxId] = {
       ...matchbox,

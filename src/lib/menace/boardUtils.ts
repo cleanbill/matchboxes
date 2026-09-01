@@ -91,17 +91,21 @@ export function getMinimaxMove(board: BoardState, player: Player): number {
   }
 
   let bestScore = -Infinity;
-  let bestMove = validMoves[0];
+  let bestMoves: number[] = [];
 
   for (const move of validMoves) {
     board[move] = player;
     const score = minimax(board, false, 0);
     board[move] = null;
+    
     if (score > bestScore) {
       bestScore = score;
-      bestMove = move;
+      bestMoves = [move];
+    } else if (score === bestScore) {
+      bestMoves.push(move);
     }
   }
 
-  return bestMove;
+  // Randomly select among all moves that tie for the best score
+  return bestMoves[Math.floor(Math.random() * bestMoves.length)];
 }

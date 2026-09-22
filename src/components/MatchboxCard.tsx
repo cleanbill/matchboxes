@@ -27,10 +27,10 @@ export const MatchboxCard: React.FC<MatchboxCardProps> = ({ matchbox, isActive }
   return (
     <div
       className={`
-        relative p-4 rounded-2xl border transition-all duration-300
+        relative p-4 rounded-2xl border transition-all duration-300 box-border min-h-[136px]
         ${
           isActive
-            ? 'bg-amber-950/40 border-amber-400/80 ring-2 ring-amber-400/40 shadow-xl shadow-amber-500/20'
+            ? 'bg-amber-950/40 border-amber-400/80 ring-2 ring-inset ring-amber-400/40 shadow-xl shadow-amber-500/20'
             : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90'
         }
       `}
@@ -89,7 +89,7 @@ export const MatchboxCard: React.FC<MatchboxCardProps> = ({ matchbox, isActive }
             <span className="text-[10px] text-slate-500">Pos (Qty)</span>
           </div>
 
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5 min-h-[56px] content-start">
             {Object.entries(beads).map(([posStr, count]) => {
               const posIdx = Number(posStr);
               const posNumber = posIdx + 1; // 1 to 9
@@ -100,7 +100,7 @@ export const MatchboxCard: React.FC<MatchboxCardProps> = ({ matchbox, isActive }
                 <div
                   key={posIdx}
                   className={`
-                    flex items-center gap-1 px-2 py-0.5 rounded-full border text-[11px] font-mono shadow-sm
+                    flex items-center gap-1 px-2 py-0.5 rounded-full border text-[11px] font-mono shadow-sm shrink-0
                     ${colorClass}
                     ${count === 0 ? 'opacity-40 grayscale' : ''}
                   `}

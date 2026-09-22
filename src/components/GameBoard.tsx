@@ -84,13 +84,13 @@ export const GameBoard: React.FC<GameBoardProps> = ({
 
               {/* Symbol X or O */}
               {cell === 'X' && (
-                <span className="text-5xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-cyan-400 to-blue-500 drop-shadow-[0_0_12px_rgba(34,211,238,0.4)] animate-in zoom-in-75 duration-200">
+                <span className="text-5xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-cyan-400 to-blue-500 drop-shadow-[0_0_12px_rgba(34,211,238,0.4)]">
                   X
                 </span>
               )}
 
               {cell === 'O' && (
-                <span className="text-5xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 drop-shadow-[0_0_12px_rgba(251,191,36,0.4)] animate-in zoom-in-75 duration-200">
+                <span className="text-5xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 drop-shadow-[0_0_12px_rgba(251,191,36,0.4)]">
                   O
                 </span>
               )}

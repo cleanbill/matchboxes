@@ -19,8 +19,8 @@ import {
 import { reinforceMatchboxes, selectMenaceMove } from '../menace/menaceEngine';
 import { getCanonicalRepresentation } from '../menace/symmetry';
 
-const STORAGE_KEY_MATCHBOXES = 'MENACE_MATCHBOXES_V1';
-const STORAGE_KEY_STATS = 'MENACE_STATS_V1';
+const STORAGE_KEY_MATCHBOXES = 'MENACE_MATCHBOXES_V2';
+const STORAGE_KEY_STATS = 'MENACE_STATS_V2';
 
 export function useMenace() {
   const [menacePlayer, setMenacePlayer] = useState<Player>('O');

@@ -19,7 +19,7 @@ beforeAll(() => {
 
 beforeEach(() => {
   localStorage.clear();
-  localStorage.setItem('MENACE_MATCHBOXES_V1', cachedMatchboxesJSON);
+  localStorage.setItem('MENACE_MATCHBOXES_V2', cachedMatchboxesJSON);
   // Fake timers prevent MENACE's 400ms auto-play from firing between moves.
   vi.useFakeTimers();
 });
@@ -109,7 +109,7 @@ describe('useMenace', () => {
   describe('localStorage persistence', () => {
     it('saves matchboxes to localStorage after init', async () => {
       await setupHook();
-      expect(localStorage.getItem('MENACE_MATCHBOXES_V1')).not.toBeNull();
+      expect(localStorage.getItem('MENACE_MATCHBOXES_V2')).not.toBeNull();
     });
 
     it('loads saved matchboxes from localStorage on mount', async () => {
@@ -124,7 +124,7 @@ describe('useMenace', () => {
           stats: { timesAccessed: 42, wins: 0, draws: 0, losses: 0 },
         },
       };
-      localStorage.setItem('MENACE_MATCHBOXES_V1', JSON.stringify(sentinel));
+      localStorage.setItem('MENACE_MATCHBOXES_V2', JSON.stringify(sentinel));
 
       const { result } = await setupHook();
       expect(result.current.matchboxes['SENTINEL']).toBeDefined();
@@ -133,7 +133,7 @@ describe('useMenace', () => {
 
     it('loads saved stats from localStorage on mount', async () => {
       const saved = { totalGames: 77, menaceWins: 30, opponentWins: 20, draws: 27, winRateHistory: [] };
-      localStorage.setItem('MENACE_STATS_V1', JSON.stringify(saved));
+      localStorage.setItem('MENACE_STATS_V2', JSON.stringify(saved));
 
       const { result } = await setupHook();
       expect(result.current.stats.totalGames).toBe(77);
@@ -143,7 +143,7 @@ describe('useMenace', () => {
     it('persists stats to localStorage after a game ends', async () => {
       const { result } = await setupHook();
       makeMoves(result, [[0, 'X'], [1, 'X'], [2, 'X']]); // X wins row 1
-      const stored = JSON.parse(localStorage.getItem('MENACE_STATS_V1') ?? 'null');
+      const stored = JSON.parse(localStorage.getItem('MENACE_STATS_V2') ?? 'null');
       expect(stored).not.toBeNull();
       expect(stored.totalGames).toBe(1);
     });
@@ -333,12 +333,12 @@ describe('useMenace', () => {
       makeMoves(result, [[0, 'X'], [1, 'X'], [2, 'X']]);
       // Verify stats are persisted before reset
       expect(
-        JSON.parse(localStorage.getItem('MENACE_STATS_V1') ?? 'null')?.totalGames
+        JSON.parse(localStorage.getItem('MENACE_STATS_V2') ?? 'null')?.totalGames
       ).toBe(1);
 
       act(() => { result.current.resetMatchboxes(); });
       // stats.totalGames resets to 0 → the save guard fires → key is not re-written
-      expect(localStorage.getItem('MENACE_STATS_V1')).toBeNull();
+      expect(localStorage.getItem('MENACE_STATS_V2')).toBeNull();
     });
 
     it('generates a fresh set of matchboxes matching the original count', async () => {

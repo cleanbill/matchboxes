@@ -31,7 +31,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   return (
     <div className="flex flex-col items-center w-full max-w-md mx-auto bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 shadow-2xl shadow-cyan-950/20">
       {/* Turn & Status Header */}
-      <div className="w-full flex items-center justify-between mb-6 pb-4 border-b border-slate-800/80">
+      <div className="w-full flex items-center justify-between mb-6 pb-4 border-b border-slate-800/80 min-h-[44px]">
         <div className="flex items-center gap-3">
           <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-sm shadow-cyan-400/50" />
           <span className="text-sm font-medium tracking-wide text-slate-300">
@@ -45,11 +45,13 @@ export const GameBoard: React.FC<GameBoardProps> = ({
           </span>
         </div>
 
-        {activeMatchboxId && (
-          <div className="px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-mono text-amber-300">
-            Box: {activeMatchboxId}
-          </div>
-        )}
+        <div className="min-h-[26px] flex items-center">
+          {activeMatchboxId && (
+            <div className="px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-mono text-amber-300">
+              Box: {activeMatchboxId}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* 3x3 Grid Board */}
@@ -65,10 +67,10 @@ export const GameBoard: React.FC<GameBoardProps> = ({
               onClick={() => onCellClick(idx)}
               className={`
                 relative flex items-center justify-center rounded-xl transition-all duration-300
-                group overflow-hidden border
+                group overflow-hidden border select-none
                 ${
                   isWinningSquare
-                    ? 'bg-amber-500/20 border-amber-400 shadow-lg shadow-amber-500/30 scale-[1.02]'
+                    ? 'bg-amber-500/20 border-amber-400 shadow-lg shadow-amber-500/30'
                     : cell !== null
                     ? 'bg-slate-900/90 border-slate-800/90'
                     : 'bg-slate-900/40 border-slate-800/50 hover:bg-slate-800/60 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/10'
@@ -82,13 +84,13 @@ export const GameBoard: React.FC<GameBoardProps> = ({
 
               {/* Symbol X or O */}
               {cell === 'X' && (
-                <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-cyan-400 to-blue-500 drop-shadow-[0_0_12px_rgba(34,211,238,0.4)] animate-in zoom-in-75 duration-200">
+                <span className="text-5xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-cyan-400 to-blue-500 drop-shadow-[0_0_12px_rgba(34,211,238,0.4)] animate-in zoom-in-75 duration-200">
                   X
                 </span>
               )}
 
               {cell === 'O' && (
-                <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 drop-shadow-[0_0_12px_rgba(251,191,36,0.4)] animate-in zoom-in-75 duration-200">
+                <span className="text-5xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 drop-shadow-[0_0_12px_rgba(251,191,36,0.4)] animate-in zoom-in-75 duration-200">
                   O
                 </span>
               )}

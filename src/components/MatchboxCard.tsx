@@ -30,7 +30,7 @@ export const MatchboxCard: React.FC<MatchboxCardProps> = ({ matchbox, isActive }
         relative p-4 rounded-2xl border transition-all duration-300
         ${
           isActive
-            ? 'bg-amber-950/40 border-amber-400/80 ring-2 ring-amber-400/40 shadow-xl shadow-amber-500/20 scale-[1.01]'
+            ? 'bg-amber-950/40 border-amber-400/80 ring-2 ring-amber-400/40 shadow-xl shadow-amber-500/20'
             : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90'
         }
       `}
@@ -54,7 +54,7 @@ export const MatchboxCard: React.FC<MatchboxCardProps> = ({ matchbox, isActive }
 
       <div className="flex items-start gap-4">
         {/* Mini 3x3 Board Preview */}
-        <div className="grid grid-cols-3 gap-1 w-20 h-20 p-1 bg-slate-950 rounded-lg border border-slate-800/80 shrink-0">
+        <div className="grid grid-cols-3 gap-1 w-20 h-20 p-1 bg-slate-950 rounded-lg border border-slate-800/80 shrink-0 select-none">
           {canonicalBoard.map((cell, idx) => {
             const beadCount = beads[idx] ?? 0;
             const posNumber = idx + 1;
@@ -63,7 +63,7 @@ export const MatchboxCard: React.FC<MatchboxCardProps> = ({ matchbox, isActive }
               <div
                 key={idx}
                 className={`
-                  relative flex items-center justify-center rounded text-[10px] font-bold font-mono
+                  relative flex items-center justify-center rounded text-[10px] font-bold font-mono leading-none overflow-hidden
                   ${
                     cell === 'X'
                       ? 'bg-cyan-950/80 text-cyan-400 border border-cyan-800/50'
@@ -73,9 +73,9 @@ export const MatchboxCard: React.FC<MatchboxCardProps> = ({ matchbox, isActive }
                   }
                 `}
               >
-                {cell ?? posNumber}
+                <span>{cell ?? posNumber}</span>
                 {cell === null && beadCount > 0 && (
-                  <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-amber-400 shadow-sm" />
+                  <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-amber-400 shadow-sm pointer-events-none" />
                 )}
               </div>
             );

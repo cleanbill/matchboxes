@@ -53,11 +53,13 @@ export const MatchboxList: React.FC<MatchboxListProps> = ({
               Matchbox Drawer ({matchboxArray.length})
             </h2>
           </div>
-          {activeMatchboxId && (
-            <span className="text-xs font-mono font-medium text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/30 animate-pulse">
-              Active Box Found
-            </span>
-          )}
+          <div className="min-h-[26px] flex items-center">
+            {activeMatchboxId && (
+              <span className="text-xs font-mono font-medium text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/30 animate-pulse">
+                Active Box Found
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Search Bar */}

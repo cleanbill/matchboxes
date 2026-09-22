@@ -10,18 +10,7 @@ import { createEmptyBoard, evaluateGame, getTurnNumber, getValidMoves } from './
  * - 4th move (Turn 4 for MENACE, board has 7 marks): 1 bead per empty cell
  */
 export function getInitialBeadCount(menaceTurnIndex: number): number {
-  switch (menaceTurnIndex) {
-    case 1:
-      return 4;
-    case 2:
-      return 3;
-    case 3:
-      return 2;
-    case 4:
-      return 1;
-    default:
-      return 1;
-  }
+  return 4; // Flat initial beads across the entire game tree gives MENACE equal early exploration
 }
 
 function registerMatchbox(
@@ -68,15 +57,13 @@ export function generateMatchboxes(menacePlayer: Player = 'O'): Record<string, M
     const countMenace = currentBoard.filter((cell) => cell === menacePlayer).length;
     const countOpponent = currentBoard.filter((cell) => cell === opponentPlayer).length;
 
-    const isMenaceTurn =
-      menacePlayer === 'X' ? countMenace === countOpponent : countOpponent === countMenace + 1;
-
-    if (isMenaceTurn) {
-      registerMatchbox(currentBoard, countMenace, matchboxMap);
-    }
+    // Generate matchboxes for ALL non-terminal states to support Self-Play
+    registerMatchbox(currentBoard, countMenace, matchboxMap);
 
     const validMoves = getValidMoves(currentBoard);
-    const nextPlayerToMove = isMenaceTurn ? menacePlayer : opponentPlayer;
+    const countX = currentBoard.filter((cell) => cell === 'X').length;
+    const countO = currentBoard.filter((cell) => cell === 'O').length;
+    const nextPlayerToMove = countX === countO ? 'X' : 'O';
 
     for (const move of validMoves) {
       const nextBoard = [...currentBoard];

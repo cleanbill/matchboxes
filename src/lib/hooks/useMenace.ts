@@ -274,12 +274,25 @@ export function useMenace() {
             });
             simBoard[selection.actualBoardMoveIndex] = menacePlayer;
           } else {
-            const oppMove =
-              opponentType === 'RANDOM'
-                ? getRandomMove(simBoard)
-                : opponentType === 'PERFECT'
-                ? getMinimaxMove(simBoard, simPlayer)
-                : selectMenaceMove(simBoard, currentBoxes).actualBoardMoveIndex;
+            let oppMove = -1;
+            if (opponentType === 'SELF') {
+              const selection = selectMenaceMove(simBoard, currentBoxes);
+              if (selection.resigned) {
+                simResult = simPlayer === 'X' ? 'O' : 'X';
+                break;
+              }
+              simHistory.push({
+                matchboxId: selection.matchboxId,
+                moveIndex: selection.canonicalMoveIndex,
+                actualBoardMoveIndex: selection.actualBoardMoveIndex,
+                player: simPlayer,
+              });
+              oppMove = selection.actualBoardMoveIndex;
+            } else if (opponentType === 'RANDOM') {
+              oppMove = getRandomMove(simBoard);
+            } else {
+              oppMove = getMinimaxMove(simBoard, simPlayer);
+            }
 
             if (oppMove !== -1) {
               simBoard[oppMove] = simPlayer;

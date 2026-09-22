@@ -6,16 +6,13 @@ import { stringToBoard } from './symmetry';
 // ─── getInitialBeadCount ─────────────────────────────────────────────────────
 
 describe('getInitialBeadCount', () => {
-  it('returns Michie original values by turn index', () => {
+  it('returns a flat initial bead count of 4 for equal early exploration', () => {
     expect(getInitialBeadCount(1)).toBe(4);
-    expect(getInitialBeadCount(2)).toBe(3);
-    expect(getInitialBeadCount(3)).toBe(2);
-    expect(getInitialBeadCount(4)).toBe(1);
-  });
-
-  it('defaults to 1 for any turn index beyond 4', () => {
-    expect(getInitialBeadCount(5)).toBe(1);
-    expect(getInitialBeadCount(99)).toBe(1);
+    expect(getInitialBeadCount(2)).toBe(4);
+    expect(getInitialBeadCount(3)).toBe(4);
+    expect(getInitialBeadCount(4)).toBe(4);
+    expect(getInitialBeadCount(5)).toBe(4);
+    expect(getInitialBeadCount(99)).toBe(4);
   });
 });
 

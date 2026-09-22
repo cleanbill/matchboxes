@@ -83,8 +83,8 @@ const REWARD_MAP = {
   LOSS: { reward: -1, type: 'losses' as const },
 };
 
-function getOutcomeReward(result: GameResult, menacePlayer: Player) {
-  if (result === menacePlayer) return REWARD_MAP.WIN;
+function getOutcomeReward(result: GameResult, player: Player) {
+  if (result === player) return REWARD_MAP.WIN;
   if (result === 'DRAW') return REWARD_MAP.DRAW;
   return REWARD_MAP.LOSS;
 }
@@ -98,15 +98,13 @@ function getOutcomeReward(result: GameResult, menacePlayer: Player) {
 export function reinforceMatchboxes(
   gameHistory: MoveRecord[],
   gameResult: GameResult,
-  menacePlayer: Player,
+  menacePlayer: Player, // Kept for signature compatibility, but we now use record.player
   matchboxes: Record<string, Matchbox>
 ): Record<string, Matchbox> {
   const updatedMatchboxes = { ...matchboxes };
-  const { reward, type: resultType } = getOutcomeReward(gameResult, menacePlayer);
 
   for (const record of gameHistory) {
-    if (record.player !== menacePlayer) continue;
-
+    const { reward, type: resultType } = getOutcomeReward(gameResult, record.player);
     const matchbox = updatedMatchboxes[record.matchboxId];
     if (!matchbox) continue;
 
